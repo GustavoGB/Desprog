@@ -29,15 +29,17 @@ void fft(double complex s[MAX_SIZE], double complex t[MAX_SIZE], int n, int sign
   double complex si[MAX_SIZE / 2];
   double complex tp[MAX_SIZE / 2];
   double complex ti[MAX_SIZE / 2];
+
   int k = 0; // iterador para sp
   int h = 0; // iterador para si
 
+  //Base a partir da fórmula Normal
   if (n == 1) {
     t[0] = s[0];
     return; //se n for 1
   }
 
-  int metade = n / 2;
+  int metade = n / 2; // Lembrando que n representa o tamanho do sinal
 
   for (int n1 = 0; n1 < metade; n1++) { // percorre para dividir os indices em pares e impares
 
@@ -49,10 +51,11 @@ void fft(double complex s[MAX_SIZE], double complex t[MAX_SIZE], int n, int sign
 
   } // depois disso já temos as listas
 
+  //Transforma a lista de t[impares] com o sinal[impares] obtido no for decima
   for (int j = 0; j < metade; j++) {
     ti[j] += si[j] * cexp(sign * 2 * PI * j * I / n);
   }
-
+  //Transforma a lista de t[pares] com o sinal[pares] obtido no primeiro for código da função
   for (int o = 0; o < metade; o++) {
     tp[o] += sp[o] * cexp(sign * 2 * PI * o * I / n);
   }
@@ -98,7 +101,7 @@ para cada coluna c da matriz
       sLinha[c] = matrix[l][c]; // Guarda em um "temp" para depois armazenar na matrix original
     }
 
-    fft_forward(sLinha, tLinha, width); // Aplicamos a fft para as linhas
+    fft_forward(sLinha, tLinha, width) ; // Aplicamos a fft para as linhas
     for (int c = 0; c < width; c++) {
       matrix[l][c] = tLinha[c]; //guarda estes valores com a fft em nossa variavel temporaria tLinha
     }

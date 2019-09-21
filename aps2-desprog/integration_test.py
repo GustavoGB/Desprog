@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+
 from filecmp import cmp
 
 
